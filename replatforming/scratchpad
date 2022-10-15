@@ -1,0 +1,51 @@
+Follow Ups
+
+* describe in more detail each of the specific dimensions
+* monolith
+* While I think of "getting off the monolith" as the single most important dimension of the overall replatforming program, I've been presented with the idea that from a frontend team perspective, we shouldn't actually care about whether we are on the monolith or not. 
+* monorepo
+* “Hey I hear you, it’s funny to me to, hey it’s strange to me too"
+May 7th of 2002. Allen Iverson
+* decoupling the replatforming program
+* webpack migration
+* what does replatforming or decoupling mean?
+* dependency management
+* solving organizational problems with technical solutions
+* doorjamb
+* migration vs rewrite
+* complexity, visibility, progress, risk
+* gantt, why would anybody care, vs high integrity commitment
+* optics
+* differentiation, reusability
+* rollout strategies, monorepo first or not, in monorepo, greenfield page or not, and then copy back or not
+Potential Dimensions
+
+1. Code rewritten for quality - Current code is legacy code with no consistency of patterns, that has undergone some number of migrations without refactoring. This code tends to be sprawling spaghetti. 
+2. Typescript - A nice to have rather than a replatforming requirement. Given that a JS file can be trivially converted to TS by a change of file extension, there are further gradations possible within this dimension.
+
+
+## Pre-Replatforming Preparation: Decoupling Frontend Code via Webpack Migration
+
+Our frontend code is server side rendered (SSR) for speed and search engine indexing. The frontend code, now largely React JS, had been previously built, bundled, and deployed as part of the PHP monolith. User requests would be routed in through the monolith, execute a PHP controller for a specific page, load and serialize data through various data stores, and then send this data to SSR code, where the HTML would be rendered out and delivered back to the user.
+
+As a prepatory step to replatforming, frontend pages are decoupled, meaning the JS is split out into a separate repo, built and bundled with Webpack, and then deployed as an independent k8s microservice--a service that emits HTML as opposed to e.g. JSON. User requests would be routed first to the PHP monolith, execute the controller, and then this data would be internally routed to an SSR pod running the JS, using a homegrown-ssr framework, and the rendered HTML would be first returned to PHP and then to the user. As part of executing SSR, the JS would call back into monolith REST and graphql endpoints to load data.
+
+Once the frontend pages were split out from the monolith to independent k8s deployments, they were considered decoupled and are ready for the next step of replatforming.
+
+
+2. Monorepo - Pages started out in the monolith, were decoupled into their own repos, which had independent k8s deployments for page specific SSR services. To solve the problem of dependency management, the independent pages will be re-coupled into a monorepo.
+
+
+6. Common Component Usage - A set of common components are being built, that adhere to a reusable component definition of done, and are usable throughout the customer journey across multiple pages. Replatformed pages should use these common components.
+
+7. Reusable Component Patterns and Definition of Done - We must build our own reusable components for our pages, that are used throughout parts of the customer journey. To what degree do our components meet the set of Patterns and Definition of Done that was intended for Common Components?
+
+-  Traffic routing - does the service accept external requests? Replatformed by next.js and production traffic percentage.
+  - Initial page load - all of the page routing, pre-action boilerplate, context and data gathering, event tracking, etc. that go into the PHP controller. 
+  - Data hydration requests that occur during SSR. Replatformed by hydrating component data via Federated GraphQL.
+2.
+
+
+8. Next.js - Next.js is both an SSR framework and a web server, so next.js usage includes:
+  - Pages using next.js for ssr instead of using the homegrown-SSR
+  - Pages taking externally routed traffic.
