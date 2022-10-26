@@ -1,5 +1,16 @@
 what does this post want to cover?
 
+breaking out of the monolith, into individual microservices, that can be independently deployed and rolled back, and owned by smaller teams. this means that the change frequency is higher and the lead time is lower. but it also means that teams need to take on new responsibilities and cultures and skills. 
+
+it also clarifies ownership, which is part of the idea of separating out domain boundaries. and apis. not just between code, but between different groups in the organization. conways law, and many correlaries. ownership is unclear, so people try to track down who is responsible, and everyone tries to push off this responsibility on others until someone is left holding the bag.
+
+in theory this should be good for the business to, so it can see clearer ownership, and also it needs to maek staffing decisions about supporting a certain service, with a certain service tier, but there is a cost to that for engineers and also computer resources.
+
+DORA metrics. what are the key DORA metrics? why are they important? they business can't change as fast, and can't learn as fast. you only learn by putting things into production, and interacting with the market. the market provides feedback and you adjust, so the faster you can adjust the more you can learn and the better you can take advantage of those signals from the market to give the market what it wants.
+
+
+
+
 the ops team co-evolved over many many years. the ops team and the codebase were symbiotic, they each worked well with the other. the ops team had the knowledge to provision new hardward, to scale services, to monitor and diagnose and debug and take corrective action. all of that knowledge was centralized. and the culture of service ownership was also centralized there. 
 
 they owned a service which is a live thing, and needed constant maintenance and tuning. they could also see and coordinate from their central location. so when someone put something in that broke the overall service, because of some interaction between pieces, the ops team would notice this, find the teams responsible, roll back the train, and tell the offenders to fix their stuff.
