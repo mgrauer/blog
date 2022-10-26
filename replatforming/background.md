@@ -1,5 +1,28 @@
 what does this post want to cover?
 
+the ops team co-evolved over many many years. the ops team and the codebase were symbiotic, they each worked well with the other. the ops team had the knowledge to provision new hardward, to scale services, to monitor and diagnose and debug and take corrective action. all of that knowledge was centralized. and the culture of service ownership was also centralized there. 
+
+they owned a service which is a live thing, and needed constant maintenance and tuning. they could also see and coordinate from their central location. so when someone put something in that broke the overall service, because of some interaction between pieces, the ops team would notice this, find the teams responsible, roll back the train, and tell the offenders to fix their stuff.
+
+this worked great, and it allowed the company to scale up very quickly the number of developers who could create features and even other business services. since we already had the infrastructure and team to run a web application, why not add on a new application to deal with supplier data, or one for managing human resources? 
+
+people on feature teams didn't have to know about alerting, or scaling, or writing performant code, or noticing when things went wrong. they didn't have a culture of service ownership, which made sense for the business at the time. so these teams thought about how many features they could get done, and they would launch a feature and move on to the next one. they didn't have to set aside time for maintaining the service, or making sure the service performed effeciently, as the demands on the service scaled up, or that they service was reliable, or that it could handle a certain amount of load.
+
+another problem was that as the number of changes on the train grew, and because they rolled the train back atomically, it prevented teams from taking ownership even if they wanted to. if you are a team and some feature from your team or another team causes problems for your area, it's harder to identify because there are larger changesets, and you have to roll the entire thing back at once. what if the problem is subtle, and only occurs over time, or occurs as the result of interactions between several different changes that interact in unexpected ways. it's harder to notice that because the background of changes is so much larger. and if you want to test, does some fix actually help, you have to wait for the integrator train, and wait for that to be deployed, and when it is deployed since it is going along with so many other changes, was the fix even if t was fixed, was that the result of your change or some other change?
+
+so even if teams wanted to have ownership over their area, it made it harder.
+
+
+talk about service ownership, as a culture, everyone needst obe aware, and roll things back, or try things, but can try things and try things quickly. but this is a culture change for people, they need to learn to own their area, and hold others working in their area accountable. that is a new responsibility, to tell people that you own this area nd they cannot do what they want, or they need to back off, or even the timeframes that they can do things.
+
+and this technology transformation doesn't happen everywhere uniformly at the same time. it takes time for different parts of the organization to adapt these changes, which means you can be operating across a culture divide. one team has already taken on the culture of service ownership, and wants their service to be reliable, and expects others working in their area to also have that ownership mindset, but they don't. they don't know to monitor their changes, they don't know to look if theyve added more errors to the logs with their changes, and they may not like it when the service owning team tells them they need to have their features roolled back because it breaks some availability metric of the service. they are trying to do their job and their job is to launcrate new features, and now they have this team standing in their way.or on their roadmpa, they don't have time allocated to the mainteance of their service and the fact that the service is now a living thing that neededs maintenencae. so this is also a culture change that product management needs to understand ad adapt to. they need t o buffer for this adaitional capacity on their roadmaps.
+
+
+
+
+
+
+
 what is replatforming, why are we doing it, why is it hard, how does it help the business, what are the changes in culture and technology needed and organization? how does it create clearer lines of ownership and the ability to move fast? how does it slow things down? what are the risks?
 
 
@@ -23,6 +46,13 @@ similarly to the difficulty of unclear ownership in code, there was also shared 
 
 what is a good example here? B2B vs B2C big small vs small big.
 
+
+
+one analogy is a knife. you start out with a very specific need, and you have a swiss army knife that only has a blade. then you see the utility of the thing, well, i'm already carrying it around, why don't i add a corkscrew, and a file, and a scissors. before long, your small specific tool that did one thing well is now a giant hunk of metal, it's bloated and awkard, and even using the knife on it is hard.
+
+now imagine that something has gone wrong, and you need to trace it down. there's a bunch of code that no one owns
+
+i lived in an old house. it started out as a beautiful grand victorian house in 1897. over time it was split into a number of apartments, each of which needed their own electicity, gas, water, and heat. and then several of those apartments were merged into two apartments by the time i lived there. in the basement, there was a maze of piping, and it was nearly impossible to tell what went where, what was still active, or what was no longer in use. any time someone came out for maintenance, they couldn't make any sense of it, so they would lay in some additional piece, or else make the smallest possible change to the existing mess. no one was thinking about the overall whole, and cared about making it easy to maintain, buecause that would be a lot of owork to figure out which pipe went where, and remove many ofthe old ones, or at least label them. so people came in and did their one change, and thechanges stacked up over time. this is like the code in the monolith. but also, notice that it worked! the apartments got the services they needed, eveni f it took longer to fix anything when it brok or make any changes.
 
 
 swiss army knife
