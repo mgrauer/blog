@@ -1,16 +1,12 @@
 What is the definition of done for replatforming? And what is the goal? In the ideal case, these would be aligned.
 
-The goal is to get off the monolith. Simple enough. 
+The goal is to get off the monolith. Simple enough. So lets start with a definition of done that measures how much off the monolith we are.
 
-So lets start with a definition of done that measures how much off the monolith are you, though this isn't so straightforward. 
-
-routing
-data
-deployed
+For technical context, we have an e-commerce website backed by a single (monolithic!) service, backed by a PHP + SQL database stack. It's actually much more complicated than this at every level, for instance, there are actually multiple separate applications that all are served out of the same codebase, and deployed into multiple separate running website services such as e-commerce, logisitics, and human resources, but for clarity this will all be greatly simplified. The e-commerce website has many separate pages including: home, landing for paid search, browse, product detail, cart, checkout, and receipt. When a user requests a page, the traffic flows to one of a fleet of generic PHP VMs, which then routes to a particular portion of code (the controller) that is attached to the specific page. This code loads data from SQL to serve the response, such as product description, price, shipping time, and then  returns the webpage to the user. An important detail is that many pages are server side rendered, meaning that HTML of the page is built with all of its details--such as height of a given image--in the PHP server before being returned to the user. 
 
 
 
-There is traffic routing, i.e. what percentage of traffic is routed through the monolith versus what percentage of non-monolith services take direct end-user traffic. 
+There are three main monolith attachments: traffic, deployment, and data. Traffic routing is what percentage of external traffic is routed through a monolith VM versus directly routing to a non-monolith service.
 
 and how many components don't get their data from the monolith, but even some components that don't get their data from the monolith proxy back to the monolith. and then some components call the monolith directly, even though they aren't deployed with the monolith. how much are you not deployed with the monolith. even if you take the 5% traffic, is that 100% off the monolith? and the categories, you can also control it via url, so some brands may be off but not all brands, and you can match at the level of a regex, so some instances of aparticular domian but not all. e.g. icp, category pages.
 
