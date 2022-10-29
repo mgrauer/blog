@@ -1,6 +1,6 @@
 # Miniminal Technical Context
 
-Our replatforming journey, and all pieces of it, are much more complex than can be described here, or even than any one person can fully understand, but a certain amount of technical context is needed to make any sense of the story. This section provides that minimum technical context, vastly simplifying the reality, but including enough of the complicating details to make the replatforming discussion interesting and useful.
+This section provides that minimum technical context to make any sense of this replatforming story, vastly simplifying the reality.
 
 My teams are frontend teams, so that will inform my perspective and focus. These frontend technical responsibilities primarily includes: React Javascript, CSS, GraphQL schema design, automated testing via React Testing Library (RTL) and Cypress, Buildkite for our build piplines (Continuous Integegration and Deployment, or CI/CD), and Kubernetes (k8s) for container management, deployment, and autoscaling.
 
