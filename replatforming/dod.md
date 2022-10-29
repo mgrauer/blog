@@ -1,8 +1,19 @@
+Technical Context of Our E-Commerce Website
+
+Greatly simplified, we have an e-commerce website backed by a single (monolithic!) service, built on top of a PHP + SQL (relational database) stack. The e-commerce website has many separate pages including: home, landing for paid search, browse, product detail, cart, checkout, and receipt. When a user requests a page, the traffic flows to one of a fleet of generic PHP VMs, which then routes to a particular portion of code (the controller) that is attached to the specific page. This code loads data from SQL to serve the response, such as product description, price, and shipping time, and then  returns the webpage to the user.
+
+An important complication is that many pages are server side rendered (SSR)--despite being built on the modern frontend Javascript framework React--meaning that HTML of the page is built with all of its details in the PHP server before being returned to the user. A more common flow for a React application would be for a user to request a page, the server would return the React code for the page to the user's browser, then the browser would parse and execute the Javascript, which would output the HTML of the page and display it. The reasons to SSR a page are to improve the customer experience and for search engine optimization. The customer experience is improved by having a fast and stable page. Rendering on the server as part of the request will speed up getting fully rendered HTML displayed on the browser, and will increase page stability because the HTML can be created with the knowledge of certain attributes such as the size of a specific image, and 
+
+--such as height of a given image--in the PHP server before being returned to the user.
+
+
+
+
 What is the definition of done for replatforming? And what is the goal? In the ideal case, these would be aligned.
 
 The goal is to get off the monolith. Simple enough. So lets start with a definition of done that measures how much off the monolith we are.
 
-For technical context, we have an e-commerce website backed by a single (monolithic!) service, backed by a PHP + SQL database stack. It's actually much more complicated than this at every level, for instance, there are actually multiple separate applications that all are served out of the same codebase, and deployed into multiple separate running website services such as e-commerce, logisitics, and human resources, but for clarity this will all be greatly simplified. The e-commerce website has many separate pages including: home, landing for paid search, browse, product detail, cart, checkout, and receipt. When a user requests a page, the traffic flows to one of a fleet of generic PHP VMs, which then routes to a particular portion of code (the controller) that is attached to the specific page. This code loads data from SQL to serve the response, such as product description, price, shipping time, and then  returns the webpage to the user. An important detail is that many pages are server side rendered, meaning that HTML of the page is built with all of its details--such as height of a given image--in the PHP server before being returned to the user. 
+ 
 
 
 
